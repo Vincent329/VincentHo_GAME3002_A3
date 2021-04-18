@@ -53,7 +53,7 @@ public class PlayerMovement : MonoBehaviour
         //{
         //    m_rb.velocity *= 0.75f;
         //}
-        AddForceToVelocity(m_rb, m_vel, 10000.0f);
+        AddForceToVelocity(m_rb, m_vel, 5.0f);
     }
 
     private void AddForceToVelocity(Rigidbody rb, Vector3 maxVelocity, float AppForce = 1, ForceMode mode = ForceMode.Force)
