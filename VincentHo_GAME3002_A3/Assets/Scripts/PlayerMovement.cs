@@ -49,13 +49,11 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //if (m_rb.velocity.magnitude > m_fSpeedValue)
-        //{
-        //    m_rb.velocity *= 0.75f;
-        //}
+        // 
         AddForceToVelocity(m_rb, m_vel, 5.0f);
     }
 
+    // used to clamp the maximum velocity when adding 
     private void AddForceToVelocity(Rigidbody rb, Vector3 maxVelocity, float AppForce = 1, ForceMode mode = ForceMode.Force)
     {
         if (AppForce == 0 || maxVelocity.magnitude == 0)
