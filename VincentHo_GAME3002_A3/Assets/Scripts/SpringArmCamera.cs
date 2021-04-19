@@ -4,44 +4,42 @@ using UnityEngine;
 
 public class SpringArmCamera : MonoBehaviour
 {
-    // Start is called before the first frame update
     [SerializeField]
     private Transform target;
-
     [SerializeField]
-    private Camera m_SpringCamera = Camera.main;
-
+    private float smoothingSpeed;
     [SerializeField]
-    private float m_fSpringConstant = 150.0f;
-    [SerializeField]
-    private float m_fDampingConstant = 60.0f;
+    private Vector3 offset;
 
-    [SerializeField]
-    private Vector3 m_vNewPos; // this is the updated position
-    private Vector3 m_vDeltaPos; // the change in position
-    private Vector3 m_vOldPos; // need?
+    //[SerializeField]
+    //private float m_fSpringConstant = 1800.0f;
+    //[SerializeField]
+    //private float m_fDampingConstant = 600.0f;
+    //[SerializeField]
+    //private float m_fMass = 50.0f;
 
-    private Vector3 m_vRelativeVelocity;
+    //[SerializeField]
+    //private Vector3 m_vNewPos; // this is the updated position
+    //private Vector3 m_vDeltaPos; // the change in position
+    //private Vector3 m_vOldPos; // need?
 
-    public float smoothingSpeed = 0.125f;
 
-    void Start()
-    {
-        m_vNewPos = transform.position;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     private void FixedUpdate()
     {
-        
+        FollowCharacter();   
     }
 
-    private void LateUpdate()
+    private void FollowCharacter()
     {
+        Vector3 vDesiredPos = target.position + offset;
+        float smoothingFactor = smoothingSpeed * Time.deltaTime;
+        Vector3 vSmoothingPos = Vector3.Lerp(transform.position, vDesiredPos, smoothingFactor);
+        transform.position = vSmoothingPos;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(offset, 2.0f);
     }
 }

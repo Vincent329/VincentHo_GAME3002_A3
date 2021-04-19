@@ -157,7 +157,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_fSpringConstant: 0
-  m_fDampingConstant: 50
+  m_fDampingConstant: 20
   m_vRest: {fileID: 2582450494015624327}
   m_fMass: 0
   m_AttachedObject: {fileID: 2073101267645905745}
