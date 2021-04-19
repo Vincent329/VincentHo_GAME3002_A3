@@ -15,8 +15,14 @@ public class DoorScript : MonoBehaviour
     [SerializeField]
     private float m_fFlipperSpringDampen = 0.0f;
 
+    // Door ID
+    [SerializeField]
+    private int doorID;
+
     private HingeJoint m_hingeJoint = null;
     private JointSpring m_jointSpring;
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -29,6 +35,10 @@ public class DoorScript : MonoBehaviour
         m_jointSpring.damper = m_fFlipperSpringDampen;
 
         m_hingeJoint.spring = m_jointSpring;
+    }
+    public int GetDoorID()
+    {
+        return doorID;
     }
 
     // public so that we can call this from the player

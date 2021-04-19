@@ -24,8 +24,6 @@ public class SpringPlatform : MonoBehaviour
     {
         m_fMass = m_AttachedObject.mass;
         m_fSpringConstant = CalculateSpringConstant();
-        //m_vRest.x = transform.position.x;
-        //m_vRest.z = transform.position.z;
     }
 
     // Update is called once per frame

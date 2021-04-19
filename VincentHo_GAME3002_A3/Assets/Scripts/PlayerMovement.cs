@@ -27,6 +27,7 @@ public class PlayerMovement : MonoBehaviour
     {
         m_rb = GetComponent<Rigidbody>();
         m_bCanJump = false;
+        transform.position = SpawnPoint.position;
     }
 
     // Update is called once per frame
@@ -41,6 +42,7 @@ public class PlayerMovement : MonoBehaviour
         m_vel = new Vector3(moveValue * m_fSpeedValue, 0.0f, 0.0f);
         //m_rb.AddForce(m_vel, ForceMode.VelocityChange);
 
+        // jump force
         if (Input.GetKeyDown(m_Jump) && m_bCanJump)
         {
             m_rb.AddForce(Vector3.up * m_fJumpForce, ForceMode.Impulse);
@@ -48,7 +50,6 @@ public class PlayerMovement : MonoBehaviour
             m_bCanJump = false;
         }
     }
-
     private void FixedUpdate()
     {
 
@@ -90,6 +91,21 @@ public class PlayerMovement : MonoBehaviour
         {
             transform.position = SpawnPoint.transform.position;
             m_rb.velocity = Vector3.zero;
+        }
+       
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "DoorCheck")
+        {
+            Debug.Log("Key???");
+            //if (Input.GetKeyDown(KeyCode.E))
+            //{
+            //    DoorScript doorCheck = other.gameObject.GetComponent<DoorScript>();
+            //    doorCheck.OpenDoor();
+            //    Debug.Log("OpenTest");
+            //}
         }
     }
 }

@@ -14,16 +14,16 @@ public class SlowDown : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
     }
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.GetType() == typeof(PlayerMovement))
+        if (other.CompareTag("Player"))
         {
             Debug.Log("This is player");
+            other.attachedRigidbody.velocity *= 0.8f;
+
         }
-        other.attachedRigidbody.velocity *= 0.8f;
 
     }
 }
