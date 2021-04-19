@@ -12,6 +12,9 @@ public class TorqueTrap : MonoBehaviour
     private Vector3 m_vCenterOfMass = Vector3.zero;
     [SerializeField]
     private Vector3 m_vForcePoint = Vector3.zero;
+    [SerializeField]
+    private float m_fMaxAngularVelocity;
+
 
     private Vector3 m_vTorque = Vector3.zero;
     private Rigidbody m_rb = null;
@@ -21,7 +24,7 @@ public class TorqueTrap : MonoBehaviour
     void Start()
     {
         m_rb = GetComponent<Rigidbody>();
-        m_rb.maxAngularVelocity = 5.0f;
+        m_rb.maxAngularVelocity = m_fMaxAngularVelocity;
     }
 
     private void FixedUpdate()

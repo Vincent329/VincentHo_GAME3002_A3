@@ -8,6 +8,7 @@ TagManager:
   - Floor
   - Trap
   - DoorCheck
+  - Key
   layers:
   - Default
   - TransparentFX

@@ -9,8 +9,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float moveValue;
     [SerializeField] private float m_fJumpForce;
     [SerializeField] private Vector3 m_vel;
-
-    [SerializeField] private float m_fMonitorSpeed;
+    [SerializeField] private int m_iKeyCount;
 
     [SerializeField] private Transform SpawnPoint;
 
@@ -28,6 +27,7 @@ public class PlayerMovement : MonoBehaviour
         m_rb = GetComponent<Rigidbody>();
         m_bCanJump = false;
         transform.position = SpawnPoint.position;
+        m_iKeyCount = 0;
     }
 
     // Update is called once per frame
@@ -92,6 +92,12 @@ public class PlayerMovement : MonoBehaviour
             transform.position = SpawnPoint.transform.position;
             m_rb.velocity = Vector3.zero;
         }
+        if (other.gameObject.tag == "Key")
+        {
+            Debug.Log("TestKey");
+            m_iKeyCount++;
+            Destroy(other.gameObject);
+        }
        
     }
 
@@ -107,5 +113,10 @@ public class PlayerMovement : MonoBehaviour
             //    Debug.Log("OpenTest");
             //}
         }
+    }
+
+    public int GetKeyCount()
+    {
+        return m_iKeyCount;
     }
 }

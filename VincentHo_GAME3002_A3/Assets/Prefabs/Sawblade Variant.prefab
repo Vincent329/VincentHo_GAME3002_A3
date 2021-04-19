@@ -31,6 +31,7 @@ MonoBehaviour:
   m_vTorqueForce: {x: 10, y: 0, z: 0}
   m_vCenterOfMass: {x: 0, y: 0, z: 0}
   m_vForcePoint: {x: 0, y: 1.64, z: 0}
+  m_fMaxAngularVelocity: 5
 --- !u!1001 &7342890944973076259
 PrefabInstance:
   m_ObjectHideFlags: 0

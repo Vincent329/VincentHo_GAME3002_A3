@@ -46,7 +46,13 @@ public class DoorCheck : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E) && m_IsInArea)
         {
-            m_Door.OpenDoor();
+            if (m_Player.GetKeyCount() == m_Door.GetDoorID())
+            {
+                m_Door.OpenDoor();
+            } else
+            {
+                Debug.Log("Key for this area not obtained");
+            }
         }
     }
 }
