@@ -10,7 +10,7 @@ public class SpringPlatform : MonoBehaviour
     [SerializeField]
     private float m_fDampingConstant;
     [SerializeField]
-    private Vector3 m_vRest;  
+    private Transform m_vRest;  
     [SerializeField]
     private float m_fMass;
     [SerializeField]
@@ -24,8 +24,8 @@ public class SpringPlatform : MonoBehaviour
     {
         m_fMass = m_AttachedObject.mass;
         m_fSpringConstant = CalculateSpringConstant();
-        m_vRest.x = transform.position.x;
-        m_vRest.z = transform.position.z;
+        //m_vRest.x = transform.position.x;
+        //m_vRest.z = transform.position.z;
     }
 
     // Update is called once per frame
@@ -36,7 +36,7 @@ public class SpringPlatform : MonoBehaviour
 
     private float CalculateSpringConstant()
     {
-        float fDisplacement = (m_vRest - m_AttachedObject.transform.position).magnitude;
+        float fDisplacement = (m_vRest.position - m_AttachedObject.transform.position).magnitude;
 
         if (fDisplacement <= 0)
         {
@@ -48,7 +48,7 @@ public class SpringPlatform : MonoBehaviour
 
     private void UpdateSpringForce()
     {
-        Vector3 vDisplacement = m_vRest - m_AttachedObject.transform.position;
+        Vector3 vDisplacement = m_vRest.position - m_AttachedObject.transform.position;
         Vector3 vDeltaVel = m_AttachedObject.velocity - m_vPrevVelocity;
 
         // F = -kx - bv
@@ -66,7 +66,7 @@ public class SpringPlatform : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawWireSphere(m_vRest, 1f);
+        Gizmos.DrawWireSphere(m_vRest.position, 1f);
 
         if (m_AttachedObject)
         {

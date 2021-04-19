@@ -12,6 +12,8 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] private float m_fMonitorSpeed;
 
+    [SerializeField] private Transform SpawnPoint;
+
     // modifiable key placed in the editor (set as Space)
     [SerializeField] private KeyCode m_Jump;
 
@@ -49,11 +51,14 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        // 
+
         AddForceToVelocity(m_rb, m_vel, 5.0f);
     }
 
     // used to clamp the maximum velocity when adding 
+    // rb = script's rigid body
+    // maxVelocity = the threshold of speed that the rigid body can travel
+    // AppForce = minimum amount of force applied to push the rigid body
     private void AddForceToVelocity(Rigidbody rb, Vector3 maxVelocity, float AppForce = 1, ForceMode mode = ForceMode.Force)
     {
         if (AppForce == 0 || maxVelocity.magnitude == 0)
@@ -80,6 +85,11 @@ public class PlayerMovement : MonoBehaviour
         if (other.gameObject.tag == "Floor")
         {
             m_bCanJump = true;
+        }
+        if (other.gameObject.tag == "Trap")
+        {
+            transform.position = SpawnPoint.transform.position;
+            m_rb.velocity = Vector3.zero;
         }
     }
 }

@@ -101,7 +101,7 @@ GameObject:
   - component: {fileID: 6201271682231036165}
   - component: {fileID: 6201271682231036162}
   m_Layer: 0
-  m_Name: ConcretePlatform
+  m_Name: IcePlatform
   m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -150,7 +150,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b6fffe0eae2e110459b8dd7090946de8, type: 2}
+  - {fileID: 2100000, guid: cd7bcf55cd1d12d4983e74bb93d5fb2f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -179,7 +179,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6201271682231036163}
-  m_Material: {fileID: 13400000, guid: c3b8af5c3ae4ab14a91756e424076f17, type: 2}
+  m_Material: {fileID: 13400000, guid: 2e9f5cc3dc468d04cb5e4c75a6a3cb78, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2

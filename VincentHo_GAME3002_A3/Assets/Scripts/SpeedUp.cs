@@ -15,8 +15,10 @@ public class SpeedUp : MonoBehaviour
     {
         
     }
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
-        other.attachedRigidbody.velocity *= 3.0f;
+        Rigidbody rb = other.attachedRigidbody;
+
+        rb.velocity *= 1.15f;
     }
 }
