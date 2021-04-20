@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using TMPro;
 
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerMovement : MonoBehaviour
@@ -10,6 +12,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float m_fJumpForce;
     [SerializeField] private Vector3 m_vel;
     [SerializeField] private int m_iKeyCount;
+    [SerializeField] private int m_iLifeCount;
 
     [SerializeField] private Transform SpawnPoint;
 
@@ -18,6 +21,8 @@ public class PlayerMovement : MonoBehaviour
 
     // checks if the player is grounded
     [SerializeField] private bool m_bCanJump;
+    [SerializeField] private TextMeshProUGUI KeyText;
+    [SerializeField] private TextMeshProUGUI LifeText;
 
     private Rigidbody m_rb;
 
@@ -28,11 +33,14 @@ public class PlayerMovement : MonoBehaviour
         m_bCanJump = false;
         transform.position = SpawnPoint.position;
         m_iKeyCount = 0;
+        m_iLifeCount = 3;
     }
 
     // Update is called once per frame
     void Update()
     {
+        DisplayKeyText();
+        DisplayLifeText();
         HandleInputs();
     }
 
@@ -52,7 +60,6 @@ public class PlayerMovement : MonoBehaviour
     }
     private void FixedUpdate()
     {
-
         AddForceToVelocity(m_rb, m_vel, 5.0f);
     }
 
@@ -79,7 +86,6 @@ public class PlayerMovement : MonoBehaviour
             rb.AddForce((maxVelocity - velocityProjectedToTarget) * AppForce, mode);
         }
     }
-    
 
     private void OnCollisionEnter(Collision other)
     {
@@ -91,30 +97,40 @@ public class PlayerMovement : MonoBehaviour
         {
             transform.position = SpawnPoint.transform.position;
             m_rb.velocity = Vector3.zero;
+            m_iLifeCount--;
+            if (m_iLifeCount <= 0)
+            {
+                SceneManager.LoadScene("GameOver");
+            }
         }
         if (other.gameObject.tag == "Key")
         {
-            Debug.Log("TestKey");
             m_iKeyCount++;
             Destroy(other.gameObject);
         }
        
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void DisplayKeyText()
     {
-        if (other.gameObject.tag == "DoorCheck")
+        if (m_iKeyCount == 0)
         {
-            Debug.Log("Key???");
-            //if (Input.GetKeyDown(KeyCode.E))
-            //{
-            //    DoorScript doorCheck = other.gameObject.GetComponent<DoorScript>();
-            //    doorCheck.OpenDoor();
-            //    Debug.Log("OpenTest");
-            //}
+            KeyText.text = "Key: None";
+        } else if (m_iKeyCount == 1)
+        {
+            KeyText.text = "Key: Ice";
+        } else if (m_iKeyCount == 2)
+        {
+            KeyText.text = "Key: Bounce";
         }
     }
 
+    private void DisplayLifeText()
+    {
+        LifeText.text = "Lives: " + m_iLifeCount;
+    }
+
+    // to reference to the door check script
     public int GetKeyCount()
     {
         return m_iKeyCount;

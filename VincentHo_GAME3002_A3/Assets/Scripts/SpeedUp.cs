@@ -19,6 +19,16 @@ public class SpeedUp : MonoBehaviour
     {
         Rigidbody rb = other.attachedRigidbody;
 
-        rb.velocity *= 1.15f;
+        //rb.velocity *= 1.05f;
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            Rigidbody rb = other.attachedRigidbody;
+            Vector3 pushForce = rb.velocity * 1.5f;
+
+            rb.AddForce(pushForce, ForceMode.Impulse);
+        }
     }
 }

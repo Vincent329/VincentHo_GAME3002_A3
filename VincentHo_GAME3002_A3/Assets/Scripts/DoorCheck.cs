@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class DoorCheck : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class DoorCheck : MonoBehaviour
     [SerializeField]
     private PlayerMovement m_Player; // to access the key value of the player
 
+    [SerializeField] private TextMeshProUGUI KeyText;
     [SerializeField]
     private bool m_IsInArea;
 
@@ -18,6 +20,7 @@ public class DoorCheck : MonoBehaviour
     {
         //m_Door = GetComponent<DoorScript>();
         m_IsInArea = false;
+        KeyText.text = "";
     }
 
     private void Update()
@@ -28,18 +31,19 @@ public class DoorCheck : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         m_IsInArea = true;
+        if (m_Player.GetKeyCount() != m_Door.GetDoorID())
+        {
+            KeyText.text = "Key not found yet";
+        } else
+        {
+            KeyText.text = "Press E to Open Door";
+        }
     }
 
     private void OnTriggerExit(Collider other)
     {
         m_IsInArea = false;
-    }
-    private void OnTriggerStay(Collider other)
-    {
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            Debug.Log("TestOpen");
-        }
+        KeyText.text = "";
     }
 
     private void HandleDoorInputs()
@@ -49,10 +53,9 @@ public class DoorCheck : MonoBehaviour
             if (m_Player.GetKeyCount() == m_Door.GetDoorID())
             {
                 m_Door.OpenDoor();
-            } else
-            {
-                Debug.Log("Key for this area not obtained");
-            }
+                Destroy(gameObject);
+                KeyText.text = "";
+            } 
         }
     }
 }

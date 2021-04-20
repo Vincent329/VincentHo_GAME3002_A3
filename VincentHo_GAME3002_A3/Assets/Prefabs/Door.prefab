@@ -163,7 +163,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4eccc164255ed2c43afabab50809384c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_fSpringConstant: 2500
+  m_fSpringConstant: 250
   m_fOriginalPosition: 0
   m_fPressedPosition: -90
   m_fFlipperSpringDampen: 50
@@ -278,4 +278,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Door: {fileID: 6821947846736483913}
   m_Player: {fileID: 0}
+  KeyText: {fileID: 0}
   m_IsInArea: 0

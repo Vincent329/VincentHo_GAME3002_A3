@@ -32,11 +32,6 @@ public class TorqueTrap : MonoBehaviour
         m_vTorque = Vector3.Cross(m_vTorqueForce, m_vForcePoint - m_vCenterOfMass);
         m_rb.AddTorque(m_vTorque);
     }
-    // Update is called once per frame
-    //void Update()
-    //{
-
-    //}
 
     private void OnDrawGizmos()
     {
