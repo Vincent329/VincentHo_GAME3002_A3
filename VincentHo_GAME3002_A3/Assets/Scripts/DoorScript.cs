@@ -8,20 +8,16 @@ public class DoorScript : MonoBehaviour
     [SerializeField]
     private float m_fSpringConstant = 0.0f;
     [SerializeField]
-    private float m_fOriginalPosition = 0.0f;
-    [SerializeField]
     private float m_fPressedPosition = 0.0f;
     [SerializeField]
     private float m_fFlipperSpringDampen = 0.0f;
 
-    // Door ID
+    // Door ID for every door
     [SerializeField]
     private int doorID;
 
     private HingeJoint m_hingeJoint = null;
     private JointSpring m_jointSpring;
-
-
 
     // Start is called before the first frame update
     void Start()
@@ -35,12 +31,13 @@ public class DoorScript : MonoBehaviour
 
         m_hingeJoint.spring = m_jointSpring;
     }
+
+    // to call into the door check script
     public int GetDoorID()
     {
         return doorID;
     }
 
-    // public so that we can call this from the player
     public void OpenDoor()
     {
         m_jointSpring.targetPosition = m_fPressedPosition;

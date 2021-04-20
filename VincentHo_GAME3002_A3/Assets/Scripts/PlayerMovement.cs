@@ -7,7 +7,7 @@ using TMPro;
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] private float m_fSpeedValue;
+    [SerializeField] private float m_fSpeedValue; 
     [SerializeField] private float moveValue;
     [SerializeField] private float m_fJumpForce;
     [SerializeField] private Vector3 m_vel;
@@ -48,7 +48,6 @@ public class PlayerMovement : MonoBehaviour
     {
         moveValue = Input.GetAxisRaw("Horizontal");
         m_vel = new Vector3(moveValue * m_fSpeedValue, 0.0f, 0.0f);
-        //m_rb.AddForce(m_vel, ForceMode.VelocityChange);
 
         // jump force
         if (Input.GetKeyDown(m_Jump) && m_bCanJump)
@@ -72,15 +71,16 @@ public class PlayerMovement : MonoBehaviour
         if (AppForce == 0 || maxVelocity.magnitude == 0)
             return;
 
+        // factor down the maximum velocity
         maxVelocity = maxVelocity + maxVelocity.normalized * 0.2f * rb.drag;
 
-        // this could be any value really
         AppForce = Mathf.Clamp(AppForce, -rb.mass/Time.fixedDeltaTime, rb.mass/Time.fixedDeltaTime);
 
         if (rb.velocity.magnitude == 0)
         {
             rb.AddForce(maxVelocity * AppForce, mode);
-        } else
+        } 
+        else
         {
             Vector3 velocityProjectedToTarget = (maxVelocity.normalized * Vector3.Dot(maxVelocity, rb.velocity) / maxVelocity.magnitude);
             rb.AddForce((maxVelocity - velocityProjectedToTarget) * AppForce, mode);
@@ -95,6 +95,8 @@ public class PlayerMovement : MonoBehaviour
         }
         if (other.gameObject.tag == "Trap")
         {
+            // Player returns to the spawn point, and loses a life
+            // lose all 3 lives and you move to the game over screen
             transform.position = SpawnPoint.transform.position;
             m_rb.velocity = Vector3.zero;
             m_iLifeCount--;

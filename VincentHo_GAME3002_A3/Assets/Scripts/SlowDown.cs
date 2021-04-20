@@ -5,8 +5,7 @@ using UnityEngine;
 public class SlowDown : MonoBehaviour
 {
     [SerializeField]
-    private float m_fSlowVariable;
-    // Start is called before the first frame update
+    private float m_fSlowVariable; // factor of 0.8 in the inspector
   
     private void OnTriggerStay(Collider other)
     {

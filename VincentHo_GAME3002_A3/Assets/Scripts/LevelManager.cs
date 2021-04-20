@@ -5,8 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
-
-
     public void LoadStartScene()
     {
         SceneManager.LoadScene("StartScene");
@@ -23,6 +21,6 @@ public class LevelManager : MonoBehaviour
     
     public void QuitGame()
     {
-        Application.Quit(); // only works in a standalone build, not in the editor
+        Application.Quit(); 
     }
 }

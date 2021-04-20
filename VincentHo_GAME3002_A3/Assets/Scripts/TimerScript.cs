@@ -19,12 +19,23 @@ public class TimerScript : MonoBehaviour
         TextToScreen();
     }
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         CheckTime();
         TextToScreen();
     }
+    private void CheckTime()
+    {
+        m_totalTime -= Time.deltaTime; 
 
+        m_minutes = (int)(m_totalTime / 60); // display total time in minutes
+        m_seconds = (int)(m_totalTime % 60); // modulo factor of total time in 60 seconds
+
+        if (m_totalTime <= 0.0f)
+        {
+            TimeExpired();
+        }
+    }
     public void TextToScreen()
     {
         if (m_seconds < 10)
@@ -36,18 +47,7 @@ public class TimerScript : MonoBehaviour
             textDisplay.text = "Time: " + m_minutes + ": " + m_seconds;
         }
     }
-    private void CheckTime()
-    {
-        m_totalTime -= Time.deltaTime;
 
-        m_minutes = (int)(m_totalTime / 60);
-        m_seconds = (int)(m_totalTime % 60);
-
-        if (m_totalTime <= 0.0f)
-        {
-            TimeExpired();
-        }
-    }
     private void TimeExpired()
     {
         SceneManager.LoadScene("GameOver");

@@ -29,6 +29,10 @@ public class TorqueTrap : MonoBehaviour
 
     private void FixedUpdate()
     {
+        // Torque = F x (p - x)
+        // F = applied force vector
+        // p = point of the force
+        // x = center of mass
         m_vTorque = Vector3.Cross(m_vTorqueForce, m_vForcePoint - m_vCenterOfMass);
         m_rb.AddTorque(m_vTorque);
     }
@@ -36,7 +40,6 @@ public class TorqueTrap : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.blue;
-        // want to see how the forces are actually applied, so that when we're working on it in the editor, it's easier to see
         Gizmos.DrawWireSphere(transform.TransformPoint(m_vCenterOfMass), 0.1f);
 
         Gizmos.color = Color.red;
