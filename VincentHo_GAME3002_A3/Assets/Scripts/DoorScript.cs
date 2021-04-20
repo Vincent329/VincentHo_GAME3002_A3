@@ -5,7 +5,6 @@ using UnityEngine;
 [RequireComponent(typeof(HingeJoint))]
 public class DoorScript : MonoBehaviour
 {
-
     [SerializeField]
     private float m_fSpringConstant = 0.0f;
     [SerializeField]
